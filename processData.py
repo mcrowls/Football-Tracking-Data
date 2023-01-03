@@ -16,7 +16,10 @@ def getEventInfo(event, threeSixty):
     # find the corresponding 360 view of the event from the other file
     view = [threeSixty[i] for i in range(len(threeSixty)) if threeSixty[i]['event_uuid'] == event['id']][0]
 
-    event
+    eventType = event['type']['name']
+    player = event['player']['name']
+    print(player)
+    print(eventType)
     print(timeArray)
     print(location)
     print(view)
