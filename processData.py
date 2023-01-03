@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 
 def getEventInfo(event):
     timeArray = [((event['period']-1)*45)+int(event['timestamp'].split('.')[0].split(':')[1]), int(event['timestamp'].split('.')[0].split(':')[-1]), int(event['timestamp'].split('.')[-1])]
+
+    print(event['location'])
     return
 
 
