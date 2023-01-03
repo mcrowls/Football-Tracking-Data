@@ -3,15 +3,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def getEventInfo(event):
+def getEventInfo(event, threeSixty):
+    # find the time of the event in an array format
     timeArray = [((event['period']-1)*45)+int(event['timestamp'].split('.')[0].split(':')[1]), int(event['timestamp'].split('.')[0].split(':')[-1]), int(event['timestamp'].split('.')[-1])]
 
-    print(event['location'])
+    # find the location of the event
+    if 'location' in event.keys():
+        location = event['location']
+    else:
+        location = None
+
+    # find the corresponding 360 view of the event from the other file
+    view = [threeSixty[i] for i in range(len(threeSixty)) if threeSixty[i]['event_uuid'] == event['id']][0]
+
+    event
+    print(timeArray)
+    print(location)
+    print(view)
     return
 
 
 game = '3788747'
-
 
 with open('open-data-master/data/three-sixty/' + game + '.json', encoding='utf-8') as f:
     threeSixty = json.load(f)
@@ -20,5 +32,5 @@ with open('open-data-master/data/events/' + game + '.json', encoding='utf-8') as
     eventData = json.load(f)
 
 
-getEventInfo(eventData[-1])
+getEventInfo(eventData[15], threeSixty)
 
