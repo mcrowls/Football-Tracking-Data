@@ -3,6 +3,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# all notable events have ['id', 'index', 'period', 'timestamp', 'minute', 'second', 'type', 'possession', 'possession_team', 'play_pattern', 'team', 'player', 'position', 'location']
+
+
+class Event():
+    def __init__(self, event):
+        self.event = event
+        return
+
+    def theNolive(self):
+        return
+
+
 def getEventInfo(event, threeSixty):
     # find the time of the event in an array format
     timeArray = [((event['period']-1)*45)+int(event['timestamp'].split('.')[0].split(':')[1]), int(event['timestamp'].split('.')[0].split(':')[-1]), int(event['timestamp'].split('.')[-1])]
