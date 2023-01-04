@@ -48,16 +48,11 @@ class Event():
         return
 
 
-game = '3788747'
 
-with open('open-data-master/data/three-sixty/' + game + '.json', encoding='utf-8') as f:
-    threeSixty = json.load(f)
+def loadInData(gameNo):
+    with open('open-data-master/data/three-sixty/' + gameNo + '.json', encoding='utf-8') as f:
+        threeSixty = json.load(f)
 
-with open('open-data-master/data/events/' + game + '.json', encoding='utf-8') as f:
-    eventData = json.load(f)
-
-
-for i in range(len(eventData)):
-    event = Event(eventData[i])
-    event.sortEvent(threeSixty)
-
+    with open('open-data-master/data/events/' + gameNo + '.json', encoding='utf-8') as f:
+        eventData = json.load(f)
+    return eventData, threeSixty
