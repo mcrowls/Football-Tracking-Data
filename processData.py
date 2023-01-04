@@ -26,17 +26,16 @@ class Event():
     def sortEvent(self, threeSixty):
         self.getTimeArray()
         self.findEventLoc()
-        self.view = [threeSixty[i] for i in range(len(threeSixty)) if threeSixty[i]['event_uuid'] == self.event['id']][0]
+        view = [threeSixty[i] for i in range(len(threeSixty)) if threeSixty[i]['event_uuid'] == self.event['id']][0]
+        print(view, '\n')
         self.eventType = self.event['type']['name']
         self.player = self.event['player']['name']
         self.eventTeam = self.event['team']['name']
         return
 
-    def sortAttackandDefence(self):
-        attackers = [player for player in self.view['freeze_frame'] if player['teammate'] == True]
-        defenders = [player for player in self.view['freeze_frame'] if player['teammate'] == False]
-        print(attackers)
-        print(defenders)
+    def sortAttackandDefence(self, view):
+        self.attackers = [player for player in view['freeze_frame'] if player['teammate'] == True]
+        self.defenders = [player for player in view['freeze_frame'] if player['teammate'] == False]
         return
 
 
