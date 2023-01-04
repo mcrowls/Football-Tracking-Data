@@ -23,13 +23,21 @@ class Event():
             location = self.event['location']
         else:
             location = None
+        if 'end_location' in self.event.keys():
+            endLocation = self.event['end_location']
+        else:
+            endLocation = None
         self.loc = location
+        self.endloc = endLocation
         return
 
         
     def sortAttackAndDefence(self, view):
-        self.attackers = [player for player in view['freeze_frame'] if player['teammate'] == True]
-        self.defenders = [player for player in view['freeze_frame'] if player['teammate'] == False]
+        self.attackers = [player['location'] for player in view['freeze_frame'] if player['teammate'] == True]
+        self.defenders = [player['location'] for player in view['freeze_frame'] if player['teammate'] == False]
+        actor = [player['location'] for player in view['freeze_frame'] if player['actor'] == True]
+        if actor != []:
+            self.actorLoc = actor[0]
         return
 
 
@@ -45,6 +53,7 @@ class Event():
         else:
             self.player = None
         self.eventTeam = self.event['team']['name']
+        del self.event
         return
 
 
