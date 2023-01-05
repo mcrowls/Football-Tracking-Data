@@ -6,6 +6,13 @@ import sys
 
 class Player():
     def __init__(self, name, team, locs=[]):
+        self.name = name
+        self.team = team
+        return
+
+    def determineActor(self, event):
+        if self.name == event.player:
+            self.locs.append(event.loc)
         return
 
 
@@ -37,14 +44,41 @@ def printName(word):
     return
 
 
+def getTeams(team):
+    LineUp = team['tactics']['lineup']
+    players = []
+    for player in LineUp:
+        players.append(player['player']['name'])
+    return players, team['team']['name']
+
+
+def createTeam(squad, teamName):
+    return [Player(name, teamName) for name in squad]
+
+
 game = '3788747'
 eventData, threeSixty = loadInData(game)
-for i in range(len(eventData)):
-    event = Event(eventData[i])
-    event.sortEvent(threeSixty)
-    if 'actorLoc' in event.__dict__.keys():
-        string = str(event.player) + ' ' + str(event.actorLoc) + ' ' + str(event.eventTeam) + '\n'
-        printName(string)
+homeSquad, homeName = getTeams(eventData[0])
+awaySquad, awayName = getTeams(eventData[1])
+home = createTeam(homeSquad, homeName)
+away = createTeam(awaySquad, awayName)
+
+
+event = Event(eventData[10])
+event.sortEvent(threeSixty)
+
+for player in (home + away):
+    player.determineActor(event)
+
+
+
+
+# for i in range(len(eventData)):
+#     event = Event(eventData[i])
+#     event.sortEvent(threeSixty)
+#     if 'actorLoc' in event.__dict__.keys():
+#         string = str(event.player) + ' ' + str(event.actorLoc) + ' ' + str(event.eventTeam) + '\n'
+#         printName(string)
 
 
 
