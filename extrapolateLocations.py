@@ -69,6 +69,8 @@ event.sortEvent(threeSixty)
 
 for player in (home + away):
     player.determineActor(event)
+    printName(player.name)
+    print(player.locs, '\n')
 
 
 
