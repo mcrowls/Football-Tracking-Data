@@ -5,9 +5,10 @@ import sys
 
 
 class Player():
-    def __init__(self, name, team, locs=[]):
+    def __init__(self, name, team):
         self.name = name
         self.team = team
+        self.locs = []
         return
 
     def determineActor(self, event):
@@ -64,24 +65,13 @@ home = createTeam(homeSquad, homeName)
 away = createTeam(awaySquad, awayName)
 
 
-event = Event(eventData[10])
-event.sortEvent(threeSixty)
 
-for player in (home + away):
-    player.determineActor(event)
-    printName(player.name)
-    print(player.locs, '\n')
+for i in range(10, 20):
+    event = Event(eventData[i])
+    event.sortEvent(threeSixty)
 
-
-
-
-# for i in range(len(eventData)):
-#     event = Event(eventData[i])
-#     event.sortEvent(threeSixty)
-#     if 'actorLoc' in event.__dict__.keys():
-#         string = str(event.player) + ' ' + str(event.actorLoc) + ' ' + str(event.eventTeam) + '\n'
-#         printName(string)
-
-
-
-
+    for player in (home + away):
+        player.determineActor(event)
+        printName(player.name)
+        print(player.__dict__.keys())
+        print(player.locs, '\n')
